@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client-install": "npm install --prefix flexion-ui",
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix flexion-ui",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

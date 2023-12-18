@@ -1,2 +1,0 @@
-export const GET_ERRORS = '[FLEXION] GET_ERRORS';
-export const CLEAR_ERRORS = '[FLEXION] CLEAR_ERRORS';
