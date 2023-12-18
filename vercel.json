@@ -4,6 +4,10 @@
             "source": "/(.*)", 
             "destination": "/" 
         }
+    ],
+    "routes": [
+        { "src": "/api/.*", "headers": { "Access-Control-Allow-Origin": "*" } }
     ]
-    
+
+      
 }
