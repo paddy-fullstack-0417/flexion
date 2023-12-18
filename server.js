@@ -13,6 +13,7 @@ app.use(cors());
 
 const userRoutes = require('./app/routes/userRoutes');
 
+// init
 app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || serverPort;
