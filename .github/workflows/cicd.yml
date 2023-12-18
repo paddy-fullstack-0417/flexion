@@ -19,7 +19,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         # port: ${{ secrets.EC2_PORT }} # Optional, default is 22
         script: |
-          cd /var/www
+          cd /var/www/flexion
           git pull
           pm2 restart
           # Any other commands needed for your deployment,
