@@ -1,46 +1,56 @@
-# name: CI/CD Pipeline
-
-# on:
-#   push:
-#     branches:
-#       - main # Change to your main branch or desired branch
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Checkout repository
-#       uses: actions/checkout@v2
-
-#     - name: Set up SSH key
-#       run: |
-#         mkdir -p ~/.ssh
-#         echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-#         chmod 600 ~/.ssh/id_rsa
-
-#     - name: Deploy to EC2
-#       run: |
-#         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.135.211.91 'bash -s' < /var/www/flexion/build-script.sh
-
-name: Deploy to EC2 via SSH
+name: Node.js CI/CD with PM2 on AWS EC2
 
 on:
   push:
     branches:
-      - main
+      - main  # Set the branch on which the CI/CD will run
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent
-        
-    - name: SSH into EC2 and Deploy
+    # Setting up Node.js environment
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '18' # Specify your Node.js version
+
+    # Install dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Run tests (if any)
+    - name: Run tests
+      run: npm test
+
+    # Deploy to AWS EC2
+    - name: Deploy to AWS EC2
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }} # Your EC2 instance SSH private key
+        HOST: ${{ secrets.HOST }} # Public IP or domain of your EC2 instance
       run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@3.135.211.91 "cd /var/www/flexion && git pull origin main"
+      # Install SSH client
+      sudo apt-get update
+      sudo apt-get install -y openssh-client
+      # Setup SSH key
+      mkdir -p ~/.ssh
+      echo "$EC2_SSH_KEY" > ~/.ssh/github_action_key
+      chmod 600 ~/.ssh/github_action_key
+      # No ssh-keyscan in this version
+      # Connect to EC2 instance and execute commands
+      ssh -o StrictHostKeyChecking=no -i ~/.ssh/github_action_key ubuntu@$HOST "
+        # Navigate to your app directory
+        cd /var/www/flexion
+        # Pull latest code from repository
+        git pull $REPO_URL
+        # Install dependencies
+        npm install
+        # Restart application using PM2
+        pm2 restart all
+      "
+ 
