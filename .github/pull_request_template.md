@@ -18,7 +18,3 @@
 - [ ] I have created unit tests (if needed)
 - [ ] I have created happy-path integration tests (if needed)
 - [ ] XD Reviewed
-
-## Reviewers
-
-- @abs-wavesight/mdf-dev
