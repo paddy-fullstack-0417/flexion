@@ -1,12 +1,14 @@
-name: Node.js CI/CD with PM2 on AWS EC2
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main  # Set the branch on which the CI/CD will run
+      - main # Change to your main branch or desired branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
