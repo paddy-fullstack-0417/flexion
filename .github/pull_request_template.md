@@ -2,7 +2,7 @@
 
 ## ADO User Story
 
-- [AB#<user_story>](add link): add story name
+- [AB#<user_story>](add link): add story name and me
 
 ## Description
 
