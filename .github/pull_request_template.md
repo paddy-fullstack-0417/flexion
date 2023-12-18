@@ -1,9 +1,5 @@
 # [Add PR Title Here]
 
-## ADO User Story
-
-- [AB#<user_story>](add link): add story name
-
 ## Description
 
 - Please provide a summary of the changes in this PR
