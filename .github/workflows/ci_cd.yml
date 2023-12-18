@@ -35,11 +35,21 @@ jobs:
         HOST: ${{ secrets.HOST }} # Public IP or domain of your EC2 instance
         REPO_URL: ${{ secrets.REPO_URL }} # Public IP or domain of your EC2 instance
       run: |
-          cd /var/www/flexion
+        # Install SSH client
+        sudo apt-get update
+        sudo apt-get install -y openssh-client
+        # Setup SSH key
+        mkdir -p ~/.ssh
+        echo "$EC2_SSH_KEY" > ~/.ssh/github_action_key
+        chmod 600 ~/.ssh/github_action_key
+        # Connect to EC2 instance and execute deployment commands
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/github_action_key ubuntu@$HOST "
+          cd /var/www/flexion/
           # Pull latest code from repository
           git pull
           # Install dependencies
           npm install
           # Restart application using PM2
           pm2 restart all
+        "
  
