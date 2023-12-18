@@ -19,6 +19,8 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         # port: ${{ secrets.EC2_PORT }} # Optional, default is 22
         script: |
+          export NPM_DIR=~/.npm
+          export PM2_DIR=~/.pm2
           cd /var/www/flexion
           sh build-script.sh
           # Any other commands needed for your deployment,
