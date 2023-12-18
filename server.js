@@ -1,17 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import passport from 'passport';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 
-import connectDB from './config/database';
-import { serverPort } from './config/key';
+// import connectDB from './config/database';
+const {serverPort} = require('./config/key');
 
 const app = express();
 
 require('dotenv').config();
 
 // Connect to the database
-connectDB();
+// connectDB();
 
 app.use(cors());
 
