@@ -19,4 +19,4 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.135.211.91 'bash -s' < deploy_script.sh
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.135.211.91 'bash -s' < /var/www/flexion/build-script.sh
