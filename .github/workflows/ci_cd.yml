@@ -10,21 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-
-    # Setting up Node.js environment
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '18' # Specify your Node.js version
-
-    # Install dependencies
-    - name: Install dependencies
-      run: npm install
-
-    # Run tests (if any)
-    - name: Run tests
-      run: npm test
+    - uses: actions/checkout@v3
 
     # Deploy to AWS EC2
     - name: Deploy to AWS EC2
