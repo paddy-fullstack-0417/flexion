@@ -1,24 +1,48 @@
-name: CI/CD Pipeline
+# name: CI/CD Pipeline
+
+# on:
+#   push:
+#     branches:
+#       - main # Change to your main branch or desired branch
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v2
+
+#     - name: Set up SSH key
+#       run: |
+#         mkdir -p ~/.ssh
+#         echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+#         chmod 600 ~/.ssh/id_rsa
+
+#     - name: Deploy to EC2
+#       run: |
+#         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.135.211.91 'bash -s' < /var/www/flexion/build-script.sh
+
+name: Deploy to EC2 via SSH
 
 on:
   push:
     branches:
-      - main # Change to your main branch or desired branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up SSH key
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+        
+    - name: SSH into EC2 and Deploy
       run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@3.135.211.91 'bash -s' < /var/www/flexion/build-script.sh
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ubuntu@3.135.211.91 "cd /var/www/flexion && git pull origin main"
