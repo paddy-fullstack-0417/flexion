@@ -1,3 +1,9 @@
+name: Node.js CI/CD with PM2 on AWS EC2
+
+on:
+  push:
+    branches:
+      - main  # Set the branch on which the CI/CD will run
 jobs:
   deploy:
     runs-on: ubuntu-latest
