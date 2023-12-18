@@ -17,7 +17,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: "ubuntu"
         key: ${{ secrets.EC2_SSH_KEY }}
-        # port: ${{ secrets.EC2_PORT }} # Optional, default is 22
         script: |
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
