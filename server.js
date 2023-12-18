@@ -11,9 +11,6 @@ require('dotenv').config();
 // Connect to the database
 connectDB();
 
-
-
-
 app.use(cors());
 
 const userRoutes = require('./app/routes/userRoutes');
