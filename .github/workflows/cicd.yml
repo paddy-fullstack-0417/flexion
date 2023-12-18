@@ -20,8 +20,7 @@ jobs:
         # port: ${{ secrets.EC2_PORT }} # Optional, default is 22
         script: |
           cd /var/www/flexion
-          git pull
-          pm2 restart
+          sh build-script.sh
           # Any other commands needed for your deployment,
           # like restarting services, running build scripts etc.
 
