@@ -35,7 +35,6 @@ jobs:
         HOST: ${{ secrets.HOST }} # Public IP or domain of your EC2 instance
         REPO_URL: ${{ secrets.REPO_URL }} # Public IP or domain of your EC2 instance
       run: |
-        # Install SSH client
           cd /var/www/flexion
           # Pull latest code from repository
           git pull
