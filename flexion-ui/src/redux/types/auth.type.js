@@ -1,0 +1,1 @@
+export const SET_CURRENT_USER = '[FLEXION] SET_CURRENT_USER';

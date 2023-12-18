@@ -1,0 +1,35 @@
+{
+  "name": "flexion-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "npm install --prefix flexion-ui",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix flexion-ui",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix flexion-ui"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "gravatar": "^1.8.2",
+    "handlebars": "^4.7.8",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.6.7",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^3.0.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "twilio": "^4.15.0",
+    "validator": "^13.11.0"
+  }
+}
